@@ -1,0 +1,300 @@
+<!-- =====================
+Wedding E-Invite (Clean Romantic Version + Map Button + Animated Reveal)
+===================== -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Wedding Invitation</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;}
+
+    html{
+      scroll-behavior:smooth;
+      scroll-snap-type:y mandatory;
+    }
+
+    body{
+      font-family:'Playfair Display',serif;
+      overflow-x:hidden;
+      background:linear-gradient(135deg,#ffe6ea,#fff6f8);
+      color:#333;
+    }
+
+    section,.hero{scroll-snap-align:start;}
+
+    /* HERO */
+    .hero{
+      height:100vh;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      background:url('https://images.unsplash.com/photo-1523438885200-e635ba2c371e') center/cover no-repeat;
+      position:relative;
+      color:white;
+      padding:20px;
+    }
+
+    .hero::before{
+      content:'';
+      position:absolute;
+      inset:0;
+      background:rgba(0,0,0,0.45);
+    }
+
+    .hero h1{
+      font-family:'Great Vibes',cursive;
+      font-size:4rem;
+      z-index:1;
+    }
+
+    .hero p{z-index:1;}
+
+    section{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:40px 20px;
+    }
+
+    .card{
+      max-width:800px;
+      width:100%;
+      background:rgba(255,255,255,0.92);
+      padding:40px;
+      border-radius:20px;
+      box-shadow:0 20px 50px rgba(0,0,0,0.15);
+
+      opacity:0;
+      transform:translateY(40px);
+      transition:all 0.8s ease;
+    }
+
+    .card.show{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    .names{
+      font-family:'Great Vibes',cursive;
+      font-size:3rem;
+      color:#ff4d6d;
+      text-align:center;
+    }
+
+    .info{
+      text-align:center;
+      margin-top:10px;
+      line-height:1.8;
+      font-size:1.1rem;
+    }
+
+    .countdown{
+      display:flex;
+      justify-content:center;
+      gap:15px;
+      margin-top:25px;
+      flex-wrap:wrap;
+    }
+
+    .time-box{
+      background:#fff0f3;
+      padding:15px;
+      border-radius:15px;
+      min-width:80px;
+      text-align:center;
+    }
+
+    .gallery{
+      overflow:hidden;
+      border-radius:20px;
+      max-width:700px;
+      margin:auto;
+    }
+
+    .slides{
+      display:flex;
+      transition:transform 0.8s ease;
+    }
+
+    .slides img{width:100%;}
+
+    .nav{text-align:center;margin-top:10px;}
+
+    .nav button{
+      padding:8px 15px;
+      border:none;
+      background:#ff4d6d;
+      color:white;
+      border-radius:20px;
+      cursor:pointer;
+      margin:5px;
+    }
+
+    /* MAP */
+    .map{
+      width:100%;
+      height:320px;
+      border-radius:15px;
+      border:none;
+      margin-top:15px;
+    }
+
+    .map-btn{
+      display:block;
+      text-align:center;
+      margin-top:10px;
+      padding:10px 15px;
+      background:#ff4d6d;
+      color:white;
+      border-radius:20px;
+      text-decoration:none;
+      width:fit-content;
+      margin-left:auto;
+      margin-right:auto;
+    }
+
+    footer{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:#ff4d6d;
+      color:white;
+      text-align:center;
+      padding:40px;
+    }
+
+    .heart{
+      position:fixed;
+      bottom:-20px;
+      color:#ff4d6d;
+      font-size:18px;
+      animation:floatUp 5s linear;
+      opacity:0.7;
+    }
+
+    @keyframes floatUp{
+      0%{transform:translateY(0);opacity:1;}
+      100%{transform:translateY(-100vh);opacity:0;}
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>You're Invited</h1>
+  <p>To celebrate our wedding 💍</p>
+</div>
+
+<section>
+  <div class="card">
+    <div class="names">mohamed & Sarah</div>
+    <div class="info">
+      📅 12 June 2026<br>
+      📍 Grand Rose Hall, Germany<br>
+      🕔 5:00 PM
+    </div>
+
+    <div class="countdown">
+      <div class="time-box"><span id="d"></span><br>Days</div>
+      <div class="time-box"><span id="h"></span><br>Hours</div>
+      <div class="time-box"><span id="m"></span><br>Min</div>
+      <div class="time-box"><span id="s"></span><br>Sec</div>
+    </div>
+  </div>
+</section>
+
+<!-- MAP -->
+<section>
+  <div class="card">
+    <h2 style="text-align:center">📍 Venue Location</h2>
+
+    <iframe
+      class="map"
+      src="https://www.google.com/maps?q=Grand+Rose+Hall+Germany&output=embed">
+    </iframe>
+
+    <a class="map-btn"
+       href="https://www.google.com/maps/search/?api=1&query=Grand+Rose+Hall+Germany"
+       target="_blank">
+       Open in Google Maps 📍
+    </a>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section>
+  <div class="card">
+    <h2 style="text-align:center">Our Love Moments</h2>
+
+    <div class="gallery">
+      <div class="slides" id="slides">
+        <img src="img1.jpg">
+        <img src="img2.jpg">
+        <img src="img3.jpg">
+      </div>
+    </div>
+
+    <div class="nav">
+      <button onclick="prev()">Prev</button>
+      <button onclick="next()">Next</button>
+    </div>
+  </div>
+</section>
+
+<footer>With love ❤️</footer>
+
+<script>
+
+// countdown
+const wedding=new Date("June 12, 2026 17:00:00").getTime();
+setInterval(()=>{
+  let now=new Date().getTime();
+  let d=wedding-now;
+
+  document.getElementById('d').innerText=Math.floor(d/86400000);
+  document.getElementById('h').innerText=Math.floor((d%86400000)/3600000);
+  document.getElementById('m').innerText=Math.floor((d%3600000)/60000);
+  document.getElementById('s').innerText=Math.floor((d%60000)/1000);
+},1000);
+
+// gallery
+let i=0;
+const slides=document.getElementById('slides');
+function show(){slides.style.transform=`translateX(${-i*100}%)`;}
+function next(){i=(i+1)%3;show();}
+function prev(){i=(i-1+3)%3;show();}
+
+// hearts
+setInterval(()=>{
+  let h=document.createElement('div');
+  h.className='heart';
+  h.innerHTML='❤';
+  h.style.left=Math.random()*100+'vw';
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),5000);
+},400);
+
+// reveal animation
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting) e.target.classList.add('show');
+  });
+});
+
+document.querySelectorAll('.card').forEach(c=>observer.observe(c));
+
+</script>
+
+</body>
+</html>

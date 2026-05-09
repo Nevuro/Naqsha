@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Engagement Invitation</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #0f0f0f, #1c1c1c);
+    color: white;
+    overflow-x: hidden;
+}
+
+.container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    width: 90%;
+    max-width: 600px;
+    padding: 40px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(15px);
+    text-align: center;
+    box-shadow: 0 0 40px rgba(255, 215, 0, 0.2);
+    animation: fadeIn 2s ease;
+}
+
+h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-weight: 300;
+    margin-bottom: 20px;
+}
+
+.names {
+    font-size: 28px;
+    margin: 20px 0;
+    letter-spacing: 2px;
+}
+
+.details {
+    margin-top: 20px;
+    line-height: 1.8;
+}
+
+.gold {
+    color: gold;
+}
+
+.btn {
+    margin-top: 25px;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 30px;
+    background: gold;
+    color: black;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: white;
+    transform: scale(1.05);
+}
+
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(30px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <div class="card">
+        <h1>You're Invited 💍</h1>
+        <h2>To Celebrate the Engagement of</h2>
+
+        <div class="names gold">
+            Mohamed & Sarah
+        </div>
+
+        <div class="details">
+            <p><strong>Date:</strong> 20 July 2026</p>
+            <p><strong>Time:</strong> 8:00 PM</p>
+            <p><strong>Location:</strong> Royal Hall, Cairo</p>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wedding Story Invite</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+body{
+    margin:0;
+    font-family:Poppins;
+    overflow:hidden;
+    background:black;
+    color:white;
+}
+
+/* CINEMATIC BACKGROUND */
+.bg{
+    position:fixed;
+    inset:0;
+    background:url("https://images.unsplash.com/photo-1529634894406-3c1a3a3b0f2a")
+    center/cover;
+    filter:brightness(0.5);
+    transform:scale(1.1);
+}
+
+/* LIGHT OVERLAY */
+.glow{
+    position:fixed;
+    inset:0;
+    background:radial-gradient(circle at 50% 50%,rgba(255,215,0,0.08),transparent 60%);
+    animation:move 8s infinite alternate;
+}
+
+@keyframes move{
+    from{transform:translate(-2%,-2%)}
+    to{transform:translate(2%,2%)}
+}
+
+/* STORY WRAPPER */
+.story{
+    display:flex;
+    width:400vw;
+    height:100vh;
+    transition:transform 0.6s ease;
+}
+
+/* EACH SCREEN */
+.screen{
+    width:100vw;
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:20px;
+    box-sizing:border-box;
+}
+
+/* TYPOGRAPHY */
+h1 {
+    font-family: "Playfair Display";
+    font-size: 50px;
+    background: linear-gradient(90deg, #d4af37, #fff3b0, #d4af37); /* golden shimmer gradient */
+    -webkit-background-clip: text; /* Chrome, Safari, Edge */
+    -webkit-text-fill-color: transparent; /* Chrome, Safari */
+    background-clip: text; /* standard property for Firefox */
+    color: transparent; /* fallback */
+}
+h2{color:gold}
+
+p{opacity:.85}
+
+/* ALBUM */
+.album img{
+    width:80%;
+    border-radius:18px;
+    margin:10px 0;
+    border:1px solid rgba(255,215,0,0.3);
+}
+
+/* COUNTDOWN */
+.countdown{
+    display:flex;
+    gap:10px;
+    margin-top:20px;
+}
+
+.box{
+    background:rgba(255,255,255,0.05);
+    padding:10px;
+    border-radius:10px;
+    min-width:70px;
+}
+
+/* BUTTON */
+button{
+    padding:12px 20px;
+    border:none;
+    border-radius:25px;
+    background:gold;
+    font-weight:bold;
+}
+
+/* NAV DOTS (minimal swipe hint) */
+.nav{
+    position:fixed;
+    bottom:20px;
+    width:100%;
+    display:flex;
+    justify-content:center;
+    gap:8px;
+}
+
+.dot{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.3);
+}
+
+.dot.active{
+    background:gold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="bg"></div>
+<div class="glow"></div>
+
+<!-- STORY -->
+<div class="story" id="story">
+
+    <!-- SCREEN 1 -->
+    <div class="screen">
+        <h1>You're Invited</h1>
+        <p>Ahmed & Sarah</p>
+        <p>A cinematic love story begins</p>
+    </div>
+
+    <!-- SCREEN 2 -->
+    <div class="screen">
+        <h2>📅 Details</h2>
+        <p>20 July 2026 • 8:00 PM</p>
+        <p>Royal Hall, Cairo</p>
+
+        <div class="countdown">
+            <div class="box"><div id="d"></div>Days</div>
+            <div class="box"><div id="h"></div>Hours</div>
+            <div class="box"><div id="m"></div>Min</div>
+            <div class="box"><div id="s"></div>Sec</div>
+        </div>
+    </div>
+
+    <!-- SCREEN 3 -->
+    <div class="screen">
+        <h2>📖 Memories</h2>
+        <div class="album">
+            <img src="img1.jpg">
+            <img src="img2.jpg">
+            <img src="img3.jpg">
+            <img src="img4.jpg">
+            <img src="img5.jpg">
+        </div>
+    </div>
+
+    <!-- SCREEN 4 -->
+    <div class="screen">
+        <h2>📍 Location</h2>
+        <p>Royal Hall, Cairo</p>
+        <button onclick="openMap()">Open Map</button>
+    </div>
+
+</div>
+
+<!-- NAV INDICATOR -->
+<div class="nav">
+    <div class="dot active"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+</div>
+
+<script>
+
+/* ================= COUNTDOWN ================= */
+const target=new Date("July 20, 2026 20:00:00").getTime();
+setInterval(()=>{
+let now=new Date().getTime();
+let d=target-now;
+
+document.getElementById("d").innerText=Math.floor(d/86400000);
+document.getElementById("h").innerText=Math.floor(d/3600000%24);
+document.getElementById("m").innerText=Math.floor(d/60000%60);
+document.getElementById("s").innerText=Math.floor(d/1000%60);
+},1000);
+
+/* ================= SWIPE SYSTEM ================= */
+let index=0;
+const story=document.getElementById("story");
+const dots=document.querySelectorAll(".dot");
+
+function update(){
+    story.style.transform=`translateX(-${index*100}vw)`;
+
+    dots.forEach((d,i)=>{
+        d.classList.toggle("active",i===index);
+    });
+}
+
+/* TOUCH SWIPE */
+let startX=0;
+
+document.addEventListener("touchstart",e=>{
+    startX=e.touches[0].clientX;
+});
+
+document.addEventListener("touchend",e=>{
+    let endX=e.changedTouches[0].clientX;
+
+    if(startX-endX>50 && index<3){
+        index++;
+        update();
+    }
+    if(endX-startX>50 && index>0){
+        index--;
+        update();
+    }
+});
+
+/* DESKTOP ARROWS (optional) */
+document.addEventListener("keydown",e=>{
+    if(e.key==="ArrowRight" && index<3){
+        index++; update();
+    }
+    if(e.key==="ArrowLeft" && index>0){
+        index--; update();
+    }
+});
+
+/* MAP */
+function openMap(){
+    window.open("https://www.google.com/maps/search/?api=1&query=Royal+Hall+Cairo");
+}
+
+</script>
+
+</body>
+</html>

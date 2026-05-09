@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Multi-Tab E-Invite Viewer</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #f8f4ef;
+    margin: 0;
+    padding: 0;
+  }
+
+  .tabs {
+    display: flex;
+    background: #b8860b;
+  }
+
+  .tab {
+    flex: 1;
+    padding: 15px;
+    text-align: center;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
+  }
+
+  .tab:hover {
+    background: #a67c00;
+  }
+
+  .tab.active {
+    background: #fff;
+    color: #b8860b;
+  }
+
+  iframe {
+    width: 100%;
+    height: 90vh;
+    border: none;
+  }
+</style>
+</head>
+<body>
+
+<div class="tabs">
+  <div class="tab active" onclick="showTab('invite1.html', this)">Invite 1</div>
+  <div class="tab" onclick="showTab('invite2.html', this)">Invite 2</div>
+  <div class="tab" onclick="showTab('invite3.html', this)">Invite 3</div>
+  <div class="tab" onclick="showTab('invite4.html', this)">Invite 4</div>
+  <div class="tab" onclick="showTab('invite5.html', this)">Invite 5</div>
+  <div class="tab" onclick="showTab('invite6.html', this)">Invite 6</div>
+  <div class="tab" onclick="showTab('invite7.html', this)">Invite 7</div>
+  <div class="tab" onclick="showTab('invite8.html', this)">Invite 8</div>
+  <div class="tab" onclick="showTab('invite9.html', this)">Invite 9</div>
+  <div class="tab" onclick="showTab('invite10.html', this)">Invite 10</div>
+  <div class="tab" onclick="showTab('invite11.html', this)">Invite 11</div>
+  <div class="tab" onclick="showTab('invite12.html', this)">Invite 12</div>
+  <div class="tab" onclick="showTab('invite13.html', this)">Invite 13</div>
+  <div class="tab" onclick="showTab('invite14.html', this)">Invite 14</div>
+  <div class="tab" onclick="showTab('invite15.html', this)">Invite 15</div>
+  <div class="tab" onclick="showTab('invite16.html', this)">Invite 16</div>
+</div>
+
+<iframe id="tabFrame" src="invite1.html"></iframe>
+
+<script>
+function showTab(file, element) {
+  // Change iframe source
+  document.getElementById('tabFrame').src = file;
+
+  // Update active tab
+  const tabs = document.querySelectorAll('.tab');
+  tabs.forEach(tab => tab.classList.remove('active'));
+  element.classList.add('active');
+}
+</script>
+
+</body>
+</html>

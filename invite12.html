@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Engagement Invitation</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+body{
+    margin:0;
+    font-family:Poppins;
+    color:#fff;
+    overflow-x:hidden;
+
+    background:url("https://images.unsplash.com/photo-1529634894406-3c1a3a3b0f2a?auto=format&fit=crop&w=1600&q=80")
+    center/cover fixed;
+}
+
+/* CINEMATIC DEPTH SYSTEM */
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:
+        radial-gradient(circle at 30% 20%, rgba(255,215,0,0.12), transparent 45%),
+        radial-gradient(circle at 70% 60%, rgba(255,255,255,0.05), transparent 50%),
+        linear-gradient(180deg, rgba(0,0,0,0.88), rgba(0,0,0,0.94));
+    z-index:0;
+}
+
+/* FLOATING LIGHT PARTICLES */
+.particles{
+    position:fixed;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    z-index:1;
+}
+.p{
+    position:absolute;
+    width:4px;
+    height:4px;
+    background:gold;
+    border-radius:50%;
+    opacity:.5;
+    animation:float 8s linear infinite;
+    box-shadow:0 0 10px gold;
+}
+@keyframes float{
+    to{transform:translateY(-120vh);opacity:0;}
+}
+
+/* HERO (CINEMATIC INTRO STYLE) */
+.hero{
+    position:relative;
+    z-index:2;
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
+
+.hero h1{
+    font-family:"Playfair Display";
+    font-size:58px;
+    background: linear-gradient(90deg, #d4af37, #fff3b0, #d4af37);
+    -webkit-background-clip: text;  /* Chrome, Safari, Edge */
+    -webkit-text-fill-color: transparent;
+    background-clip: text;          /* Standard (some browsers support) */
+    color: transparent;              /* Fallback for non-supporting browsers */
+}
+.hero .names{
+    font-size:38px;
+    color:#ffd700;
+    margin-top:10px;
+    letter-spacing:2px;
+}
+
+.hero p{
+    opacity:.8;
+}
+
+/* LUXURY SECTIONS */
+.section{
+    position:relative;
+    z-index:2;
+    max-width:850px;
+    margin:60px auto;
+    padding:40px;
+    background:rgba(10,10,10,.55);
+    border:1px solid rgba(255,215,0,.2);
+    border-radius:22px;
+    backdrop-filter:blur(12px);
+}
+
+/* TIMELINE STYLE */
+.timeline{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+.item{
+    padding:15px;
+    border-left:2px solid gold;
+    padding-left:15px;
+}
+
+/* COUNTDOWN */
+.countdown{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+}
+.box{
+    padding:10px;
+    background:rgba(255,255,255,.05);
+    border-radius:10px;
+    min-width:70px;
+    text-align:center;
+}
+
+/* GALLERY STACK */
+.gallery img{
+    width:100%;
+    margin-top:15px;
+    border-radius:18px;
+}
+
+/* MAP CARD */
+.map-card{
+    padding:20px;
+    border-radius:18px;
+    border:1px solid rgba(255,215,0,.2);
+}
+button{
+    margin-top:15px;
+    padding:12px 20px;
+    border:none;
+    border-radius:25px;
+    background:linear-gradient(90deg,#d4af37,#fff3b0,#d4af37);
+    font-weight:bold;
+    cursor:pointer;
+}
+
+/* FOOTER */
+footer{
+    text-align:center;
+    padding:40px;
+    opacity:.6;
+}
+footer span{color:gold;}
+</style>
+</head>
+
+<body>
+
+<div class="particles" id="particles"></div>
+
+<!-- HERO -->
+<div class="hero">
+    <h1>You're Invited</h1>
+    <div class="names">Ahmed & Sarah</div>
+    <p>To celebrate a beautiful beginning</p>
+</div>
+
+<!-- TIMELINE -->
+<div class="section">
+    <div class="timeline">
+        <div class="item">💍 Engagement Ceremony</div>
+        <div class="item">📅 20 July 2026</div>
+        <div class="item">⏰ 8:00 PM</div>
+        <div class="item">🏛 Royal Hall, Cairo</div>
+    </div>
+</div>
+
+<!-- COUNTDOWN -->
+<div class="section">
+    <div class="countdown">
+        <div class="box"><span id="d"></span><br>Days</div>
+        <div class="box"><span id="h"></span><br>Hours</div>
+        <div class="box"><span id="m"></span><br>Min</div>
+        <div class="box"><span id="s"></span><br>Sec</div>
+    </div>
+</div>
+
+<!-- GALLERY -->
+<div class="section">
+    <div class="gallery">
+        <img src="img1.jpg">
+        <img src="img2.jpg">
+        <img src="img3.jpg">
+    </div>
+</div>
+
+<!-- MAP -->
+<div class="section map-card">
+    <h2>📍 Location</h2>
+    <p>Royal Hall, Cairo</p>
+
+    <button onclick="openMap()">Open Google Maps</button>
+</div>
+
+<footer>
+    Created by <span>Naqsha Studio</span>
+</footer>
+
+<script>
+
+// particles
+function p(){
+    const el=document.createElement("div");
+    el.className="p";
+    el.style.left=Math.random()*100+"vw";
+    el.style.animationDuration=(4+Math.random()*6)+"s";
+    document.getElementById("particles").appendChild(el);
+    setTimeout(()=>el.remove(),8000);
+}
+setInterval(p,300);
+
+// map
+function openMap(){
+    window.open("https://www.google.com/maps/search/?api=1&query=Royal+Hall+Cairo");
+}
+
+// countdown
+const t=new Date("July 20, 2026 20:00:00").getTime();
+setInterval(()=>{
+    let now=new Date().getTime();
+    let d=t-now;
+    document.getElementById("d").innerText=Math.floor(d/86400000);
+    document.getElementById("h").innerText=Math.floor(d/3600000%24);
+    document.getElementById("m").innerText=Math.floor(d/60000%60);
+    document.getElementById("s").innerText=Math.floor(d/1000%60);
+},1000);
+
+</script>
+
+</body>
+</html>

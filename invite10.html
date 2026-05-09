@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Engagement Invitation</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin:0;
+    font-family:'Poppins',sans-serif;
+    color:#fff;
+    overflow-x:hidden;
+
+    /* PHOTO BACKGROUND */
+    background: url("https://images.unsplash.com/photo-1529634894406-3c1a3a3b0f2a?auto=format&fit=crop&w=1600&q=80")
+    no-repeat center center fixed;
+    background-size:cover;
+}
+
+/* DARK OVERLAY (FIX READABILITY) */
+body::before {
+    content:"";
+    position:fixed;
+    inset:0;
+    background: rgba(0,0,0,0.78);
+    z-index:0;
+}
+
+/* floating hearts */
+.hearts {
+    position:fixed;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    z-index:1;
+}
+.heart {
+    position:absolute;
+    bottom:-20px;
+    color:rgba(255,215,0,0.4);
+    animation: floatUp linear infinite;
+}
+@keyframes floatUp {
+    to {
+        transform: translateY(-120vh);
+        opacity:0;
+    }
+}
+
+/* sections */
+.section {
+    position:relative;
+    z-index:2;
+    max-width:800px;
+    margin:90px auto;
+    padding:40px;
+    background: rgba(20,20,20,0.55);
+    border:1px solid rgba(255,215,0,0.25);
+    border-radius:22px;
+    backdrop-filter: blur(12px);
+    opacity:0;
+    transform: translateY(40px);
+    transition: all 1s ease;
+    box-shadow: 0 25px 70px rgba(0,0,0,0.6);
+}
+
+.section.show {
+    opacity:1;
+    transform: translateY(0);
+}
+
+/* TEXT FIX (LUXURY CONTRAST) */
+h1 {
+    font-family:'Playfair Display';
+    font-size:48px;
+    text-align:center;
+    color:#ffffff;
+    letter-spacing:1px;
+    margin-bottom:10px;
+}
+
+.names {
+    font-size:34px;
+    text-align:center;
+    color:#ffd700;
+    letter-spacing:2px;
+    margin:15px 0;
+    text-shadow:0 0 15px rgba(255,215,0,0.3);
+}
+
+p {
+    text-align:center;
+    color:#e6e6e6;
+    font-size:15px;
+}
+
+/* countdown */
+.countdown {
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    margin-top:20px;
+}
+
+.box {
+    background: rgba(255,255,255,0.06);
+    border:1px solid rgba(255,215,0,0.25);
+    padding:12px;
+    border-radius:12px;
+    min-width:70px;
+    text-align:center;
+    color:#fff;
+}
+
+/* gallery */
+.gallery {
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+.gallery img {
+    width:100%;
+    border-radius:18px;
+    border:1px solid rgba(255,215,0,0.25);
+    box-shadow: 0 15px 50px rgba(0,0,0,0.6);
+    transition:0.4s;
+}
+
+.gallery img:hover {
+    transform:scale(1.02);
+}
+
+/* footer */
+.footer {
+    text-align:center;
+    margin:60px 0 30px;
+    color:rgba(255,255,255,0.6);
+    font-size:13px;
+    position:relative;
+    z-index:2;
+}
+.footer span {
+    color:gold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="hearts" id="hearts"></div>
+
+<!-- HERO -->
+<div class="section">
+    <h1>You're Invited 💍</h1>
+    <div class="names">Ahmed & Sarah</div>
+    <p>We are happy to celebrate our engagement with you</p>
+</div>
+
+<!-- DETAILS -->
+<div class="section">
+    <p>20 July 2026 • 8:00 PM</p>
+    <p>Royal Hall, Cairo</p>
+
+    <div class="countdown">
+        <div class="box"><span id="days"></span><br>Days</div>
+        <div class="box"><span id="hours"></span><br>Hours</div>
+        <div class="box"><span id="minutes"></span><br>Min</div>
+        <div class="box"><span id="seconds"></span><br>Sec</div>
+    </div>
+</div>
+
+<!-- GALLERY -->
+<div class="section">
+    <div class="gallery">
+        <img src="img1.jpg">
+        <img src="img2.jpg">
+        <img src="img3.jpg">
+    </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+    Created by <span>Naqsha</span>
+</div>
+
+<script>
+// scroll reveal
+const sections=document.querySelectorAll('.section');
+window.addEventListener('scroll',()=>{
+    sections.forEach(sec=>{
+        if(sec.getBoundingClientRect().top<window.innerHeight-100){
+            sec.classList.add('show');
+        }
+    });
+});
+
+// countdown
+const target=new Date("July 20, 2026 20:00:00").getTime();
+setInterval(()=>{
+    const now=new Date().getTime();
+    const d=target-now;
+
+    document.getElementById("days").innerText=Math.floor(d/(1000*60*60*24));
+    document.getElementById("hours").innerText=Math.floor((d%(1000*60*60*24))/(1000*60*60));
+    document.getElementById("minutes").innerText=Math.floor((d%(1000*60*60))/(1000*60));
+    document.getElementById("seconds").innerText=Math.floor((d%(1000*60))/1000);
+},1000);
+
+// hearts
+function heart(){
+    const h=document.createElement("div");
+    h.classList.add("heart");
+    h.innerHTML="❤";
+    h.style.left=Math.random()*100+"vw";
+    h.style.animationDuration=(3+Math.random()*5)+"s";
+    document.getElementById("hearts").appendChild(h);
+    setTimeout(()=>h.remove(),8000);
+}
+setInterval(heart,500);
+</script>
+
+</body>
+</html>

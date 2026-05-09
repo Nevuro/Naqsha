@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Engagement Invitation</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<style>
+body {
+    margin:0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg,#0f0f0f,#1c1c1c);
+    color:white;
+    text-align:center;
+}
+
+.container {
+    max-width:700px;
+    margin:40px auto;
+    padding:30px;
+    background: rgba(255,255,255,0.05);
+    border-radius:20px;
+    backdrop-filter: blur(15px);
+}
+
+h1 {
+    font-family: 'Playfair Display';
+    font-size:40px;
+}
+
+.names {
+    font-size:28px;
+    color:gold;
+    margin:15px 0;
+}
+
+/* Gallery */
+.gallery {
+    margin-top:20px;
+}
+.gallery img {
+    width:100%;
+    border-radius:15px;
+}
+
+/* Countdown */
+.countdown {
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    margin-top:20px;
+}
+.box {
+    background:#222;
+    padding:10px;
+    border-radius:10px;
+}
+
+/* Buttons */
+button {
+    margin-top:15px;
+    padding:10px 20px;
+    border:none;
+    border-radius:25px;
+    background:gold;
+    cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container" id="invite">
+
+<h1>You're Invited 💍</h1>
+<p>To the Engagement of</p>
+
+<div class="names">Ahmed & Sarah</div>
+
+<p>20 July 2026 - 8:00 PM</p>
+<p>Royal Hall, Cairo</p>
+
+<!-- Countdown -->
+<div class="countdown">
+    <div class="box"><span id="days"></span><br>Days</div>
+    <div class="box"><span id="hours"></span><br>Hours</div>
+    <div class="box"><span id="minutes"></span><br>Minutes</div>
+    <div class="box"><span id="seconds"></span><br>Seconds</div>
+</div>
+
+<!-- Gallery -->
+<div class="gallery">
+    <img id="galleryImg" src="img1.jpg">
+</div>
+
+<!-- Controls -->
+<button onclick="prev()">Prev</button>
+<button onclick="next()">Next</button>
+
+<br>
+
+</div>
+
+<!-- Music -->
+<audio id="music" autoplay loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
+</audio>
+
+<script>
+// Countdown
+const targetDate = new Date("July 20, 2026 20:00:00").getTime();
+
+setInterval(() => {
+    const now = new Date().getTime();
+    const diff = targetDate - now;
+
+    document.getElementById("days").innerText = Math.floor(diff / (1000*60*60*24));
+    document.getElementById("hours").innerText = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+    document.getElementById("minutes").innerText = Math.floor((diff%(1000*60*60))/(1000*60));
+    document.getElementById("seconds").innerText = Math.floor((diff%(1000*60))/1000);
+}, 1000);
+
+// Gallery
+let images = [
+    "img1.jpg", // Replace with actual image paths
+    "img2.jpg",
+    "img3.jpg",
+    "img4.jpg"
+];
+
+let index = 0;
+
+function show() {
+    document.getElementById("galleryImg").src = images[index];
+}
+
+function next() {
+    index = (index + 1) % images.length;
+    show();
+}
+
+function prev() {
+    index = (index - 1 + images.length) % images.length;
+    show();
+}
+
+async function captureElement(element) {
+    // Save original styles
+    const originalBg = element.style.background;
+
+    // Force dark background for capture
+    element.style.background = "#0f0f0f";
+
+    const canvas = await html2canvas(element, {
+        scale: 2,
+        useCORS: true,
+        backgroundColor: "#0f0f0f" // KEY FIX
+    });
+
+    // Restore original background
+    element.style.background = originalBg;
+
+    return canvas;
+}
+
+
+// Autoplay fix for mobile
+document.body.addEventListener("click", () => {
+    document.getElementById("music").play();
+});
+</script>
+
+</body>
+</html>

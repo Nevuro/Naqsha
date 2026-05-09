@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Engagement Invitation</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin:0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg,#0f0f0f,#1c1c1c);
+    color:white;
+    overflow-x:hidden;
+}
+
+/* Floating hearts */
+.hearts {
+    position:fixed;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    overflow:hidden;
+}
+.heart {
+    position:absolute;
+    bottom:-20px;
+    color:rgba(255,192,203,0.4);
+    animation: floatUp linear infinite;
+}
+@keyframes floatUp {
+    to {
+        transform: translateY(-110vh);
+        opacity:0;
+    }
+}
+
+/* Sections */
+.section {
+    max-width:700px;
+    margin:80px auto;
+    padding:30px;
+    background: rgba(255,255,255,0.05);
+    border-radius:20px;
+    backdrop-filter: blur(15px);
+    opacity:0;
+    transform: translateY(40px);
+    transition: all 1s ease;
+}
+.section.show {
+    opacity:1;
+    transform: translateY(0);
+}
+
+h1 {
+    font-family:'Playfair Display';
+    font-size:42px;
+}
+
+.names {
+    font-size:28px;
+    color:gold;
+    margin:15px 0;
+}
+
+/* Countdown */
+.countdown {
+    display:flex;
+    justify-content:center;
+    gap:15px;
+}
+.box {
+    background:#222;
+    padding:10px;
+    border-radius:10px;
+}
+
+/* Scrollable Gallery */
+.gallery {
+    display:flex;
+    gap:15px;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    padding-bottom:10px;
+}
+
+.gallery img {
+    flex:0 0 80%;
+    border-radius:15px;
+    scroll-snap-align:center;
+    transition:0.3s;
+}
+
+/* Hide scrollbar (clean look) */
+.gallery::-webkit-scrollbar {
+    display:none;
+}
+
+/* Buttons */
+button {
+    margin-top:10px;
+    padding:10px 20px;
+    border:none;
+    border-radius:25px;
+    background:gold;
+    cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="hearts" id="hearts"></div>
+
+<!-- Section 1 -->
+<div class="section">
+    <h1>You're Invited 💍</h1>
+    <p>To the Engagement of</p>
+    <div class="names">Ahmed & Sarah</div>
+</div>
+
+<!-- Section 2 -->
+<div class="section">
+    <p>20 July 2026 - 8:00 PM</p>
+    <p>Royal Hall, Cairo</p>
+
+    <div class="countdown">
+        <div class="box"><span id="days"></span><br>Days</div>
+        <div class="box"><span id="hours"></span><br>Hours</div>
+        <div class="box"><span id="minutes"></span><br>Minutes</div>
+        <div class="box"><span id="seconds"></span><br>Seconds</div>
+    </div>
+</div>
+
+<!-- Section 3 -->
+<div class="section">
+    <div class="gallery">
+        <img src="img1.jpg">
+        <img src="img2.jpg">
+        <img src="img3.jpg">
+    </div>
+</div>
+
+<!-- Music -->
+<audio id="music" loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
+</audio>
+
+<script>
+// Scroll animation
+const sections = document.querySelectorAll('.section');
+window.addEventListener('scroll', () => {
+    sections.forEach(sec => {
+        const top = sec.getBoundingClientRect().top;
+        if (top < window.innerHeight - 100) {
+            sec.classList.add('show');
+        }
+    });
+});
+
+// Countdown
+const targetDate = new Date("July 20, 2026 20:00:00").getTime();
+setInterval(() => {
+    const now = new Date().getTime();
+    const diff = targetDate - now;
+
+    document.getElementById("days").innerText = Math.floor(diff / (1000*60*60*24));
+    document.getElementById("hours").innerText = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+    document.getElementById("minutes").innerText = Math.floor((diff%(1000*60*60))/(1000*60));
+    document.getElementById("seconds").innerText = Math.floor((diff%(1000*60))/1000);
+},1000);
+
+// Floating hearts
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "❤";
+    heart.style.left = Math.random()*100 + "vw";
+    heart.style.animationDuration = (3 + Math.random()*5) + "s";
+    heart.style.fontSize = (10 + Math.random()*20) + "px";
+    document.getElementById("hearts").appendChild(heart);
+
+    setTimeout(()=> heart.remove(),8000);
+}
+setInterval(createHeart, 500);
+
+// Mobile audio unlock
+document.body.addEventListener("click",()=>{
+    document.getElementById("music").play();
+});
+</script>
+
+</body>
+</html>
