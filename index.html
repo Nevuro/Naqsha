@@ -45,6 +45,59 @@
 </head>
 <body>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Multi-Tab E-Invite Viewer</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .tabs {
+    display: flex;
+    background: #b8860b;
+  }
+
+  .tab {
+    flex: 1;
+    padding: 15px;
+    text-align: center;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
+  }
+
+  .tab:hover {
+    background: #a67c00;
+  }
+
+  .tab.active {
+    background: #fff;
+    color: #b8860b;
+  }
+
+  .iframe-container {
+    flex: 1; /* Fills remaining space */
+    overflow: hidden; /* Remove scrollbars from iframe container */
+  }
+
+  iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+</style>
+</head>
+<body>
+
 <div class="tabs">
   <div class="tab active" onclick="showTab('invite1.html', this)">Invite 1</div>
   <div class="tab" onclick="showTab('invite2.html', this)">Invite 2</div>
@@ -64,9 +117,17 @@
   <div class="tab" onclick="showTab('invite16.html', this)">Invite 16</div>
 </div>
 
-<iframe id="tabFrame" src="invite1.html"></iframe>
+<div class="iframe-container">
+  <iframe id="tabFrame" src="invite1.html"></iframe>
+</div>
 
 <script>
+function showTab(file, element) {
+  document.getElementById('tabFrame').src = file;
+  const tabs = document.querySelectorAll('.tab');
+  tabs.forEach(tab => tab.classList.remove('active'));
+  element.classList.add('active');
+}
 function showTab(file, element) {
   // Change iframe source
   document.getElementById('tabFrame').src = file;
