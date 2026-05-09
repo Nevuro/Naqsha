@@ -128,9 +128,6 @@ function showTab(file, element) {
   tabs.forEach(tab => tab.classList.remove('active'));
   element.classList.add('active');
 }
-function showTab(file, element) {
-  // Change iframe source
-  document.getElementById('tabFrame').src = file;
 
   // Update active tab
   const tabs = document.querySelectorAll('.tab');
