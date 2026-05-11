@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Naqsha Invitations</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:
+    linear-gradient(rgba(0,0,0,0.55),rgba(0,0,0,0.65)),
+    url('https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1920&auto=format&fit=crop');
+    background-size:cover;
+    background-position:center;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    color:white;
+}
+
+/* Main Card */
+.hero{
+    text-align:center;
+    width:90%;
+    max-width:700px;
+    padding:40px 25px;
+    backdrop-filter:blur(10px);
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.15);
+    border-radius:30px;
+    animation:fadeUp 1.2s ease;
+}
+
+/* Brand */
+.logo{
+    font-family:'Playfair Display',serif;
+    font-size:64px;
+    font-weight:700;
+    background:linear-gradient(90deg,#d4af37,#fff3b0,#d4af37);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    margin-bottom:10px;
+}
+
+.arabic{
+    font-size:28px;
+    margin-bottom:18px;
+    opacity:0.9;
+}
+
+/* Subtitle */
+.subtitle{
+    font-size:18px;
+    line-height:1.7;
+    color:rgba(255,255,255,0.88);
+    margin-bottom:35px;
+}
+
+/* Button */
+.enter-btn{
+    display:inline-block;
+    padding:15px 40px;
+    border-radius:50px;
+    background:linear-gradient(90deg,#d4af37,#b8860b);
+    color:white;
+    text-decoration:none;
+    font-weight:600;
+    font-size:16px;
+    transition:0.35s;
+    box-shadow:0 10px 25px rgba(212,175,55,0.35);
+}
+
+.enter-btn:hover{
+    transform:translateY(-4px) scale(1.03);
+    box-shadow:0 14px 30px rgba(212,175,55,0.5);
+}
+
+/* Small Text */
+.note{
+    margin-top:25px;
+    font-size:13px;
+    opacity:0.7;
+}
+
+/* Animation */
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(40px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* Mobile */
+@media(max-width:600px){
+
+    .logo{
+        font-size:48px;
+    }
+
+    .arabic{
+        font-size:22px;
+    }
+
+    .subtitle{
+        font-size:15px;
+    }
+
+    .enter-btn{
+        width:100%;
+        padding:15px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="hero">
+
+    <div class="logo">Naqsha</div>
+
+    <div class="arabic">نقشة</div>
+
+    <div class="subtitle">
+        Luxury Digital Invitations crafted for unforgettable moments.  
+        Elegant • Cinematic • Modern Experiences
+    </div>
+
+    <!-- Change index.html to your tabs page -->
+    <a href="https://nevuro.github.io/Naqsha/?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAb21jcARuCfpleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA81NjcwNjczNDMzNTI0MjcAAafXlfhmvWtlRov3Oexu4b3UsoTOxx42M4XMd6aplgNukcFY5D_kYzHXfL1sgQ_aem_-wU4WBOOcIXYueoMzjZWFw" class="enter-btn">
+        View Invitations
+    </a>
+
+    <div class="note">
+        Scroll through unique invitations experiences
+    </div>
+
+</div>
+
+</body>
+</html>
