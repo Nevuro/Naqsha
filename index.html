@@ -3,139 +3,133 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Multi-Tab E-Invite Viewer</title>
+<title>E-Invite Tabs</title>
+
 <style>
-  body {
-    font-family: Arial, sans-serif;
-    background: #f8f4ef;
-    margin: 0;
-    padding: 0;
-  }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-  .tabs {
-    display: flex;
-    background: #b8860b;
-  }
+html,body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    font-family:Arial,sans-serif;
+    background:#f5f5f5;
+}
 
-  .tab {
-    flex: 1;
-    padding: 15px;
-    text-align: center;
-    color: white;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background 0.3s;
-  }
+/* Main Layout */
+.container{
+    display:flex;
+    flex-direction:column;
+    height:100vh;
+    width:100%;
+}
 
-  .tab:hover {
-    background: #a67c00;
-  }
+/* Tabs */
+.tabs{
+    display:flex;
+    overflow-x:auto;
+    background:#b8860b;
+    scrollbar-width:none;
+}
 
-  .tab.active {
-    background: #fff;
-    color: #b8860b;
-  }
+.tabs::-webkit-scrollbar{
+    display:none;
+}
 
-  iframe {
-    width: 100%;
-    height: 90vh;
-    border: none;
-  }
+.tab{
+    flex:1;
+    min-width:120px;
+    text-align:center;
+    padding:14px 10px;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+    user-select:none;
+    white-space:nowrap;
+}
+
+.tab:hover{
+    background:#a67c00;
+}
+
+.tab.active{
+    background:white;
+    color:#b8860b;
+}
+
+/* Content */
+.viewer{
+    flex:1;
+    position:relative;
+    overflow:hidden;
+}
+
+iframe{
+    width:100%;
+    height:100%;
+    border:none;
+    background:white;
+}
+
+/* Mobile */
+@media (max-width:600px){
+
+    .tab{
+        font-size:14px;
+        padding:12px 8px;
+        min-width:100px;
+    }
+
+}
 </style>
 </head>
+
 <body>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Multi-Tab E-Invite Viewer</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
+<div class="container">
 
-  .tabs {
-    display: flex;
-    background: #b8860b;
-  }
+    <div class="tabs">
+        <div class="tab active"
+             onclick="showTab('invite1.html', this)">
+             Basic
+        </div>
 
-  .tab {
-    flex: 1;
-    padding: 15px;
-    text-align: center;
-    color: white;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background 0.3s;
-  }
+        <div class="tab"
+             onclick="showTab('invite2.html', this)">
+             Luxury
+        </div>
 
-  .tab:hover {
-    background: #a67c00;
-  }
+        <div class="tab"
+             onclick="showTab('invite3.html', this)">
+             Cinematic
+        </div>
 
-  .tab.active {
-    background: #fff;
-    color: #b8860b;
-  }
+        <div class="tab"
+             onclick="showTab('invite4.html', this)">
+             Ultra
+        </div>
+    </div>
 
-  .iframe-container {
-    flex: 1; /* Fills remaining space */
-    overflow: hidden; /* Remove scrollbars from iframe container */
-  }
+    <div class="viewer">
+        <iframe id="frame" src="invite1.html"></iframe>
+    </div>
 
-  iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-  }
-</style>
-</head>
-<body>
-
-<div class="tabs">
-  <div class="tab active" onclick="showTab('invite1.html', this)">Invite 1</div>
-  <div class="tab" onclick="showTab('invite2.html', this)">Invite 2</div>
-  <div class="tab" onclick="showTab('invite3.html', this)">Invite 3</div>
-  <div class="tab" onclick="showTab('invite4.html', this)">Invite 4</div>
-  <div class="tab" onclick="showTab('invite5.html', this)">Invite 5</div>
-  <div class="tab" onclick="showTab('invite6.html', this)">Invite 6</div>
-  <div class="tab" onclick="showTab('invite7.html', this)">Invite 7</div>
-  <div class="tab" onclick="showTab('invite8.html', this)">Invite 8</div>
-  <div class="tab" onclick="showTab('invite9.html', this)">Invite 9</div>
-  <div class="tab" onclick="showTab('invite10.html', this)">Invite 10</div>
-  <div class="tab" onclick="showTab('invite11.html', this)">Invite 11</div>
-  <div class="tab" onclick="showTab('invite12.html', this)">Invite 12</div>
-  <div class="tab" onclick="showTab('invite13.html', this)">Invite 13</div>
-  <div class="tab" onclick="showTab('invite14.html', this)">Invite 14</div>
-  <div class="tab" onclick="showTab('invite15.html', this)">Invite 15</div>
-  <div class="tab" onclick="showTab('invite16.html', this)">Invite 16</div>
-</div>
-
-<div class="iframe-container">
-  <iframe id="tabFrame" src="invite1.html"></iframe>
 </div>
 
 <script>
-function showTab(file, element) {
-  document.getElementById('tabFrame').src = file;
-  const tabs = document.querySelectorAll('.tab');
-  tabs.forEach(tab => tab.classList.remove('active'));
-  element.classList.add('active');
-}
-function showTab(file, element) {
-  // Change iframe source
-  document.getElementById('tabFrame').src = file;
+function showTab(file, el){
 
-  // Update active tab
-  const tabs = document.querySelectorAll('.tab');
-  tabs.forEach(tab => tab.classList.remove('active'));
-  element.classList.add('active');
+    document.getElementById("frame").src = file;
+
+    document.querySelectorAll(".tab")
+    .forEach(tab => tab.classList.remove("active"));
+
+    el.classList.add("active");
 }
 </script>
 
